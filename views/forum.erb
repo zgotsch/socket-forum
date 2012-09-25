@@ -1,0 +1,14 @@
+<h1><%= forum.title %></h1>
+<h2>Topics</h2>
+<% if forum.topics.empty? %>
+	<h2>No topics have been created yet!</h2>
+	<button>Create one!</button>
+<% else %>
+	<ul>
+		<% forum.topics.each do |topic| %>
+			<li>
+				<a href="<%= url("/forums/#{forum.id}/topics/#{topic.id}") %>"><%= topic.title %></a>
+			</li>
+		<% end %>
+	</ul>
+<% end %>
