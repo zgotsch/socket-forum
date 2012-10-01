@@ -16,8 +16,8 @@ def hmac(message, secret)
 	outer_padding = 0x94
 
 	zero_padded_secret = secret.ljust(256, 0.chr).chars
-	inner_key = zero_padded_secret.map { |x| (x.ord ^ inner_padding).chr }.join
-	outer_key = zero_padded_secret.map { |x| (x.ord ^ outer_padding).chr }.join
+	inner_key = zero_padded_secret.map { |x| x ^ inner_padding }.join
+	outer_key = zero_padded_secret.map { |x| x ^ outer_padding }.join
 
 	inner_hash = Digest::SHA2.new.update(inner_key + message).to_s
 	return Digest::SHA2.new.update(outer_key + inner_hash).to_s
