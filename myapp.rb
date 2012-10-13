@@ -185,7 +185,7 @@ post '/forums/:forum_id/topics/:topic_id' do
 			topic.posts << new_post
 			new_post.author = current_user
 			new_post.save
-			post_html = erb :post, :locals => {:post => new_post}
+			post_html = erb :post, :locals => {:post => new_post}, :layout => false
 			'{"status": "success",' +
 			' "post": {"html": "' + post_html + '",' +
 					 ' "auth": "' + hmac(new_post.body, hmac_secret) + '"}' +

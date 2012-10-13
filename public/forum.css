@@ -32,21 +32,23 @@ div.post {
 	margin-bottom: 5px;
 	padding-bottom: 5px;
 	border-bottom: 1px solid #aaa;
-	clear: both;
-	display: table;
+	/*display: table;*/
 	/*background-color:blue;*/
+	clear:both;
 }
 
 div.preface {
+	width: 15%;
 	padding-right: 15px;
-	width: 20%;
-	display: table-cell;
+	float: left;
+	/*display: table-cell;*/
 	/*background-color:green;*/
 }
 
 div.body {
-	display: table-cell;
+	/*display: table-cell;*/
 	word-break: break-all;
+	float: left;
 }
 
 div.post p {
@@ -61,7 +63,7 @@ span.author {
 
 br.clear {
 	clear: both;
-	display: none;
+	display: block;
 }
 
 .breaklongwords {

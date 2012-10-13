@@ -10,7 +10,7 @@
 	<% else %>
 		<div id="post_container">
 			<% topic.posts.reverse.each do |post| %>
-				<%= erb :post, :locals => {:post => post} %>
+				<%= erb :post, :locals => {:post => post}, :layout => false %>
 			<% end %>
 		</div>
 	<% end %>

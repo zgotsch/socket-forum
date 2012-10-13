@@ -1,9 +1,17 @@
 var socket = io.connect(':1234/');
 
 function displayPost(post) {
-	$('#post_container').prepend(
-		post.html
-	);
+	new_div = $(post.html);
+	new_div.css('display', 'none');
+	$('#post_container').prepend(new_div);
+	var new_div_final_height = new_div.height();
+	new_div.css('height', 0);
+	new_div.css('opacity', 0);
+	new_div.css('display', 'block');
+	new_div.animate({
+		opacity: 1,
+		height: new_div_final_height
+	}, 500);
 }
 
 function addPost(post) {
