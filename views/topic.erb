@@ -1,18 +1,17 @@
-<h1><%= topic.title %></h1>
-<form id="new_post" method="post">
-	<textarea id="new_post_body"></textarea>
-	<input id="new_post_submit" type="submit"></input>
-</form>
+<div id="left_pane">
+	<h1><%= topic.title %></h1>
+	<form id="new_post" method="post">
+		<textarea id="new_post_body"></textarea>
+		<input id="new_post_submit" type="submit"></input>
+	</form>
 
-<% if topic.posts.empty? %>
-	<h2>No posts yet!</h2>
-<% else %>
-	<div id="post_container">
-		<% topic.posts.reverse.each do |post| %>
-			<div class="post">
-				<span class="author"><%= post.author.name %>:</span>
-				<%= post.body %>
-			</div>
-		<% end %>
-	</div>
-<% end %>
+	<% if topic.posts.empty? %>
+		<h2>No posts yet!</h2>
+	<% else %>
+		<div id="post_container">
+			<% topic.posts.reverse.each do |post| %>
+				<%= erb :post, :locals => {:post => post} %>
+			<% end %>
+		</div>
+	<% end %>
+</div>

@@ -1,11 +1,8 @@
-var socket = io.connect(':80/');
+var socket = io.connect(':1234/');
 
 function displayPost(post) {
 	$('#post_container').prepend(
-		'<div class="post">' +
-		'<span class="author">' + post.author_name + ':</span> ' +
-		post.body +
-		'</div>'
+		post.html
 	);
 }
 

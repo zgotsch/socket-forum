@@ -6,6 +6,8 @@ require 'data_mapper'
 require 'bcrypt'
 require 'digest/sha2'
 
+require 'json'
+
 hmac_secret = ''
 File.open('shared_secret.key', 'r') do |f|
 	hmac_secret = f.read.strip
@@ -183,11 +185,14 @@ post '/forums/:forum_id/topics/:topic_id' do
 			topic.posts << new_post
 			new_post.author = current_user
 			new_post.save
+			post_html = erb :post, :locals => {:post => new_post}
 			'{"status": "success",' +
-			' "post": {"body": "' + new_post.body + '",' +
-					 ' "author_name": "' + new_post.author.name + '",' +
+			' "post": {"html": "' + post_html + '",' +
 					 ' "auth": "' + hmac(new_post.body, hmac_secret) + '"}' +
 			'}'
+			JSON.generate({:status => "success",
+						   :post => {:html => post_html,
+									 :auth => hmac(post_html, hmac_secret)}})
 		else
 			'{"status": "fail", "message": "Topic doesn\'t exist in this forum"}'
 		end

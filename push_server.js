@@ -8,7 +8,6 @@ if(typeof(String.prototype.trim) === "undefined")
     };
 }
 
-
 function HMAC(message, secret) {
 	var inner_padding = 0x8d;
 	var outer_padding = 0x94;
@@ -36,11 +35,11 @@ fs.readFile('shared_secret.key', 'ascii', function (err, secret) {
 	}
 	secret = secret.trim();
 
-	var io = require('socket.io').listen(80);
+	var io = require('socket.io').listen(1234);
 
 	io.sockets.on('connection', function (socket) {
 		socket.on('new_post', function (data) {
-			var hmac = HMAC(data.body, secret);
+			var hmac = HMAC(data.html, secret);
 			if(hmac == data.auth) {
 				socket.broadcast.emit('new_post', data);
 			}

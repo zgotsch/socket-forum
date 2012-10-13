@@ -55,6 +55,7 @@ GEM
       data_objects (= 0.10.9)
     do_sqlite3 (0.10.9-x86-mingw32)
       data_objects (= 0.10.9)
+    eventmachine (1.0.0)
     eventmachine (1.0.0-x86-mingw32)
     fastercsv (1.5.5)
     json (1.7.5)
@@ -82,5 +83,6 @@ PLATFORMS
 DEPENDENCIES
   data_mapper
   dm-sqlite-adapter
+  eventmachine
   sinatra
   thin

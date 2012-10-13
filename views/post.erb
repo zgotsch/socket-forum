@@ -1,0 +1,15 @@
+<div class="post">
+	<div class="preface">
+		<p>
+			<span class="author"><%= post.author.name %></span>
+			wrote:
+		</p>
+		<p>at <%= post.created_at.strftime('%I:%M') %></p>
+	</div>
+	<div class="body">
+		<p>
+		<%= post.body %>
+		</p>
+	</div>
+	<br class="clear" />
+</div>

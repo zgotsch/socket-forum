@@ -1,5 +1,6 @@
 source "http://rubygems.org"
 gem "thin"
+gem "eventmachine"
 gem "sinatra"
 gem "data_mapper"
 gem "dm-sqlite-adapter"
