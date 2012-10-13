@@ -16,6 +16,7 @@ def hmac(message, secret)
 	outer_padding = 0x94
 
 	zero_padded_secret = secret.ljust(256, 0.chr).chars
+
 	inner_key = zero_padded_secret.map { |x| (x.ord ^ inner_padding).chr }.join
 	outer_key = zero_padded_secret.map { |x| (x.ord ^ outer_padding).chr }.join
 
@@ -94,10 +95,10 @@ def current_user
 end
 
 #User management
+white_list = ['/signup', '/login', '/logout']
 before do
 	puts current_user.inspect
 	if current_user == nil
-		white_list = ['/signup', '/login', '/logout']
 		unless white_list.include? request.path_info
 			redirect to('/login')
 		end

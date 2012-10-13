@@ -1,5 +1,14 @@
 var crypto = require('crypto')
 
+if(typeof(String.prototype.trim) === "undefined")
+{
+    String.prototype.trim = function() 
+    {
+        return String(this).replace(/^\s+|\s+$/g, '');
+    };
+}
+
+
 function HMAC(message, secret) {
 	var inner_padding = 0x8d;
 	var outer_padding = 0x94;
@@ -25,13 +34,14 @@ fs.readFile('shared_secret.key', 'ascii', function (err, secret) {
 	if (err) {
 		return console.log(err);
 	}
+	secret = secret.trim();
 
 	var io = require('socket.io').listen(80);
 
 	io.sockets.on('connection', function (socket) {
 		socket.on('new_post', function (data) {
 			var hmac = HMAC(data.body, secret);
-			if(hmac == data.post.auth) {
+			if(hmac == data.auth) {
 				socket.broadcast.emit('new_post', data);
 			}
 			else {
